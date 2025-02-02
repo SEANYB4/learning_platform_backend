@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const MONGO_URI = 'mongodb://localhost:27017/learning_platform';
+
+
+
 const connectDB = async () => {
 
     try {
