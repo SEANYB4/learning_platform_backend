@@ -25,7 +25,7 @@ const verifyToken = (req, res, next) => {
     if (authHeader) {
 
         const token = authHeader.split(' ')[1];
-
+        console.log('Checking token');
 
         jwt.verify(token, 'secretKey', (err, user) => {
             if (err) {
@@ -203,6 +203,20 @@ app.get('/assignments/:userId', async (req, res) => {
     } catch(eror) {
         res.status(500).send('Error fetching user data: ', error.message);
     }
+});
+
+app.post('/api/logout', (req, res) => {
+    
+ 
+    
+    // Assuming you might store a log of user logouts or update user status
+    const userId = req.body.userId;
+    console.log(`User ${userId} logged out at ${new Date().toISOString()}`);
+
+    // Since token invalidation is not feasible with stateless JWT by default,
+    // just return a success response. The client should delete the token.
+    res.status(200).json({ message: "Logged out successfully" });
+
 });
 
 app.listen(PORT, () => {
